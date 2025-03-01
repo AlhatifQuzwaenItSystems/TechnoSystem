@@ -2,10 +2,14 @@ local player = game.Players.LocalPlayer
 local screenGui = Instance.new("ScreenGui")
 screenGui.Parent = player.PlayerGui
 
-local logo = Instance.new("ImageLabel")
-logo.Size = UDim2.new(0, 200, 0, 200)
+local logo = Instance.new("TextLabel")
+logo.Size = UDim2.new(0, 200, 0, 50)
 logo.Position = UDim2.new(0.5, -100, 0.5, -100)
-logo.Image = "https://drive.google.com/uc?export=view&id=1-VlRqwzGuV5LgSWNFTIGrJhIofyWwKdr"
+logo.Text = "TechnoSystem Script"
+logo.TextColor3 = Color3.fromRGB(255, 255, 255)
+logo.TextSize = 24
+logo.TextScaled = true
+logo.BackgroundTransparency = 1
 logo.Parent = screenGui
 
 local visualFrame = Instance.new("Frame")

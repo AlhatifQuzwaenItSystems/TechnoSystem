@@ -10,6 +10,7 @@ logo.TextColor3 = Color3.fromRGB(255, 255, 255)
 logo.TextSize = 24
 logo.TextScaled = true
 logo.BackgroundTransparency = 1
+logo.Visible = false
 logo.Parent = screenGui
 
 local visualFrame = Instance.new("Frame")
@@ -17,17 +18,36 @@ visualFrame.Size = UDim2.new(0, 600, 0, 400)
 visualFrame.Position = UDim2.new(0.5, -300, 0.5, -200)
 visualFrame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 visualFrame.BackgroundTransparency = 0.5
-visualFrame.Visible = false
+visualFrame.Visible = true
 visualFrame.Parent = screenGui
 
 local titleText = Instance.new("TextLabel")
 titleText.Size = UDim2.new(1, 0, 0.2, 0)
+titleText.Position = UDim2.new(0, 10, 0, 0)
 titleText.Text = "Script Fishing By TechnoSystem || Version - 1.0.0"
 titleText.TextColor3 = Color3.fromRGB(255, 255, 255)
 titleText.TextSize = 24
 titleText.TextScaled = true
 titleText.BackgroundTransparency = 1
 titleText.Parent = visualFrame
+
+local miniSizeButton = Instance.new("TextButton")
+miniSizeButton.Size = UDim2.new(0, 50, 0, 30)
+miniSizeButton.Position = UDim2.new(1, -60, 0, 10)
+miniSizeButton.Text = "Min"
+miniSizeButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+miniSizeButton.BackgroundColor3 = Color3.fromRGB(100, 100, 100)
+miniSizeButton.TextSize = 16
+miniSizeButton.Parent = visualFrame
+
+local quitButton = Instance.new("TextButton")
+quitButton.Size = UDim2.new(0, 50, 0, 30)
+quitButton.Position = UDim2.new(1, -120, 0, 10)
+quitButton.Text = "Quit"
+quitButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+quitButton.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+quitButton.TextSize = 16
+quitButton.Parent = visualFrame
 
 local buttonPanel = Instance.new("Frame")
 buttonPanel.Size = UDim2.new(0, 150, 1, 0)
@@ -116,44 +136,19 @@ resetButton.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
 resetButton.TextSize = 20
 resetButton.Parent = settingsPanel
 
+miniSizeButton.MouseButton1Click:Connect(function()
+    visualFrame.Visible = false
+    logo.Visible = true
+end)
+
 logo.MouseButton1Click:Connect(function()
     visualFrame.Visible = true
+    logo.Visible = false
 end)
 
-playerButton.MouseButton1Click:Connect(function()
-    featurePanel.Visible = true
-    settingsPanel.Visible = false
+quitButton.MouseButton1Click:Connect(function()
+    screenGui:Destroy()
 end)
-
-settingsButton.MouseButton1Click:Connect(function()
-    settingsPanel.Visible = true
-    featurePanel.Visible = false
-end)
-
-local isInfinityJumpEnabled = false
-local userInputService = game:GetService("UserInputService")
-
-local function toggleInfinityJump()
-    isInfinityJumpEnabled = not isInfinityJumpEnabled
-    if isInfinityJumpEnabled then
-        infinityJumpButton.Text = "Infinity Jump: ON"
-        infinityJumpButton.BackgroundColor3 = Color3.fromRGB(0, 255, 0)
-    else
-        infinityJumpButton.Text = "Infinity Jump: OFF"
-        infinityJumpButton.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
-    end
-end
-
-userInputService.InputBegan:Connect(function(input, gameProcessed)
-    if gameProcessed then return end
-    if input.UserInputType == Enum.UserInputType.Keyboard and input.KeyCode == Enum.KeyCode.Space then
-        if isInfinityJumpEnabled then
-            player.Character:MoveTo(player.Character.HumanoidRootPart.Position + Vector3.new(0, 50, 0))
-        end
-    end
-end)
-
-infinityJumpButton.MouseButton1Click:Connect(toggleInfinityJump)
 
 local function resetScript()
     isInfinityJumpEnabled = false

@@ -33,7 +33,7 @@ titleText.Parent = visualFrame
 
 local miniSizeButton = Instance.new("TextButton")
 miniSizeButton.Size = UDim2.new(0, 50, 0, 30)
-miniSizeButton.Position = UDim2.new(1, -60, 0, 10)
+miniSizeButton.Position = UDim2.new(0, 10, 0, 10)
 miniSizeButton.Text = "Min"
 miniSizeButton.TextColor3 = Color3.fromRGB(255, 255, 255)
 miniSizeButton.BackgroundColor3 = Color3.fromRGB(100, 100, 100)
@@ -42,7 +42,7 @@ miniSizeButton.Parent = visualFrame
 
 local quitButton = Instance.new("TextButton")
 quitButton.Size = UDim2.new(0, 50, 0, 30)
-quitButton.Position = UDim2.new(1, -120, 0, 10)
+quitButton.Position = UDim2.new(1, -60, 0, 10)
 quitButton.Text = "Quit"
 quitButton.TextColor3 = Color3.fromRGB(255, 255, 255)
 quitButton.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
@@ -75,13 +75,14 @@ teleportButton.TextSize = 20
 teleportButton.Parent = buttonPanel
 
 local infinityJumpButton = Instance.new("TextButton")
-infinityJumpButton.Size = UDim2.new(1, 0, 0, 50)
-infinityJumpButton.Position = UDim2.new(0, 0, 0.2, 0)
+infinityJumpButton.Size = UDim2.new(0, 200, 0, 50)
+infinityJumpButton.Position = UDim2.new(0, 450, 0.2, 0)
 infinityJumpButton.Text = "Infinity Jump: OFF"
 infinityJumpButton.TextColor3 = Color3.fromRGB(255, 255, 255)
 infinityJumpButton.BackgroundColor3 = Color3.fromRGB(100, 100, 100)
 infinityJumpButton.TextSize = 20
-infinityJumpButton.Parent = buttonPanel
+infinityJumpButton.Visible = false
+infinityJumpButton.Parent = visualFrame
 
 local settingsButton = Instance.new("TextButton")
 settingsButton.Size = UDim2.new(1, 0, 0, 50)
@@ -147,11 +148,12 @@ logo.MouseButton1Click:Connect(function()
 end)
 
 quitButton.MouseButton1Click:Connect(function()
-    screenGui:Destroy()
+    if screenGui.Parent then
+        screenGui:Destroy()
+    end
 end)
 
 local function resetScript()
-    isInfinityJumpEnabled = false
     infinityJumpButton.Text = "Infinity Jump: OFF"
     infinityJumpButton.BackgroundColor3 = Color3.fromRGB(100, 100, 100)
     print("Script and settings have been reset to default values.")
@@ -159,4 +161,8 @@ end
 
 resetButton.MouseButton1Click:Connect(function()
     resetScript()
+end)
+
+playerButton.MouseButton1Click:Connect(function()
+    infinityJumpButton.Visible = true
 end)
